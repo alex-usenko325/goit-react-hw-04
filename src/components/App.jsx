@@ -1,35 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import SearchBar from './SearchBar/SearchBar';
+import ImageGallery from './ImageGallery/ImageGallery';
+import Loader from './Loader/Loader';
+import ErrorMessage from './ErrorMassage/ErrorMassage';
+import LoadMoreBtn from './LoadMoreBtn/LoadMoreBtn';
+import { fetchImages } from '../api/fetchImages';
+import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [images, setImages] = useState([]);
+  const [query, setQuery] = useState('');
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+
+  const handleSearch = async (searchQuery) => {
+    setQuery(searchQuery);
+    setPage(1);
+    setImages([]);
+    await loadImages(searchQuery, 1);
+  };
+
+  const loadImages = async (searchQuery, currentPage) => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const results = await fetchImages(searchQuery, currentPage);
+      setImages((prevImages) => [...prevImages, ...results]);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleLoadMore = () => {
+    const nextPage = page + 1;
+    setPage(nextPage);
+    loadImages(query, nextPage);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="app">
+      <SearchBar onSubmit={handleSearch} />
+      {error && <ErrorMessage message={error} />}
+      <ImageGallery images={images} />
+      {loading && <Loader />}
+      {images.length > 0 && !loading && <LoadMoreBtn onClick={handleLoadMore} />}
+    </div>
+  );
+};
 
-export default App
+export default App;
