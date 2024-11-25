@@ -2,8 +2,9 @@ const API_KEY = 'C-vl2DTJ7FcSRPkK5XwKq0oB76utC7TDkmPMD5wSP_w';
 const BASE_URL = 'https://api.unsplash.com';
 
 export const fetchImages = async (query, page = 1) => {
+  const perPage = 21;
   const response = await fetch(
-    `${BASE_URL}/search/photos?query=${query}&page=${page}&client_id=${API_KEY}`
+    `${BASE_URL}/search/photos?query=${query}&page=${page}&per_page=${perPage}&client_id=${API_KEY}`
   );
 
   if (!response.ok) {
