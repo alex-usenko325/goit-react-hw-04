@@ -6,6 +6,14 @@
   transition: transform 0.3s ease;
 }
 
-.image:hover {
-  transform: scale(1.1);
+@media (max-width: 1279px) {
+  .image:focus {
+    transform: scale(1.1);
+  }
+}
+
+@media (min-width: 1280px) {
+  .image:hover {
+    transform: scale(1.1);
+  }
 }

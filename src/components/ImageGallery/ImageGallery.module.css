@@ -17,11 +17,6 @@
   box-sizing: border-box;
 }
 
-.galleryItem:hover {
-  transform: scale(1.05);
-  transition: transform 0.3s ease;
-}
-
 @media (max-width: 767px) {
   .gallery {
     flex-direction: column;
@@ -40,6 +35,13 @@
   }
 }
 
+@media (max-width: 1279px) {
+  .galleryItem:focus {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+  }
+}
+
 @media (min-width: 1280px) {
   .gallery {
     margin: 32px auto;
@@ -48,5 +50,10 @@
   }
   .galleryItem {
     flex: 1 1 calc((100% / 3) - 24px);
+  }
+
+  .galleryItem:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
   }
 }
