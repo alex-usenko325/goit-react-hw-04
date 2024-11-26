@@ -45,7 +45,8 @@ const App = () => {
     loadImages(query, nextPage); 
   };
 
-  const openModal = (image) => {
+  const openModal = (id) => {
+    const image = images.find((image) => image.id === id);
     setSelectedImage(image);
     setIsModalOpen(true);
   };
@@ -67,11 +68,12 @@ const App = () => {
       )}
       <ImageModal
         isOpen={isModalOpen}
-        onRequestClose={closeModal}
+        onClose={closeModal}
         image={selectedImage}
       />
     </div>
   );
 };
+
 
 export default App;

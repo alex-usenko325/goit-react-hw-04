@@ -1,7 +1,9 @@
 import Modal from 'react-modal';
+import { FaTimes } from 'react-icons/fa'; 
 import s from './ImageModal.module.css';
 
 Modal.setAppElement('#root');
+
 
 const ImageModal = ({ image, isOpen, onClose }) => {
    if (!image) return null;
@@ -22,7 +24,9 @@ const ImageModal = ({ image, isOpen, onClose }) => {
           <p><strong>Likes:</strong> {likes}</p>
           <p><strong>Description:</strong> {alt_description || 'No description available'}</p>
         </div>
-        <button className={s.closeButton} onClick={onClose}>Close</button>
+        <button className={s.closeButton} onClick={onClose}>
+          <FaTimes size={24} />
+        </button>
       </div>
     </Modal>
   );
