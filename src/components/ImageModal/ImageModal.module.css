@@ -34,14 +34,22 @@
 }
 
 .info {
-  text-align: left;
-  margin-top: 16px;
+  height: 48px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  border-top: 1px solid #808080;
+  padding: 8px 16px;
+  box-sizing: border-box;
+  background-color: #fafafb;
+  color: #333;
 }
 
 .info p {
-  margin: 4px 0;
+  margin-right: 10px;
   font-size: 14px;
-  color: #333;
 }
 
 .closeButton {
