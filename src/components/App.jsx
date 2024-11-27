@@ -2,11 +2,8 @@ import { useState } from 'react';
 import SearchBar from './SearchBar/SearchBar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Loader from './Loader/Loader';
-import ErrorMessage from './ErrorMassage/ErrorMassage';
 import LoadMoreBtn from './LoadMoreBtn/LoadMoreBtn';
-import ImageModal from './ImageModal/ImageModal';
 import { fetchImages } from '../api/fetchImages';
-import { Toaster } from 'react-hot-toast';
 import './App.css';
 
 const App = () => {
@@ -15,8 +12,6 @@ const App = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
 
   const handleSearch = async (searchQuery) => {
     setQuery(searchQuery);
@@ -45,35 +40,29 @@ const App = () => {
     loadImages(query, nextPage); 
   };
 
-  const openModal = (id) => {
-    const image = images.find((image) => image.id === id);
-    setSelectedImage(image);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedImage(null);
-  };
-
   return (
     <div className="app">
       <SearchBar onSubmit={handleSearch} />
-      {error && <ErrorMessage message={error} />}
-      <Toaster />
-      <ImageGallery images={images} openModal={openModal} />
-      {loading && <Loader />}
-      {images.length > 0 && !loading && (
-        <LoadMoreBtn onClick={handleLoadMore} />
+      {error && <div className="error">{error}</div>}
+
+    
+      {loading && query && !images.length && <Loader />}
+
+      <ImageGallery images={images} />
+      
+  
+      {!loading && images.length > 0 && (
+        <div>
+          {images.length > 0 && (
+            <LoadMoreBtn onClick={handleLoadMore} />
+          )}
+        </div>
       )}
-      <ImageModal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        image={selectedImage}
-      />
+      
+    
+      {loading && images.length > 0 && <Loader />}
     </div>
   );
 };
-
 
 export default App;
