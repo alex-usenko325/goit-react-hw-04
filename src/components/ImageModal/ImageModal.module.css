@@ -8,7 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 9999;
 }
 
 .modal {
@@ -21,6 +21,12 @@
   position: relative;
   text-align: center;
   overflow: hidden;
+  transform: translateY(-50px); /* Додати ефект анімації */
+  transition: transform 0.3s ease-in-out;
+}
+
+.modal.open {
+  transform: translateY(0); /* Анімація модалки при відкритті */
 }
 
 .content {
@@ -59,21 +65,26 @@
 
 .closeButton {
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 8px;
   right: 8px;
   background: #f44336;
-  color: white;
+  color: #fff;
   border: none;
   border-radius: 50%;
   width: 32px;
   height: 32px;
   font-size: 16px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .closeButton:hover {
   background: #d32f2f;
+  transform: scale(1.1);
+}
+
+.closeButton:active {
+  background: #b71c1c;
 }
