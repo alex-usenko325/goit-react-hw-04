@@ -1,37 +1,35 @@
-import { useState } from 'react';
-import { toast } from 'react-hot-toast';
-import { GoSearch } from "react-icons/go"; 
-import s from './SearchBar.module.css';
+import { useState } from "react";
+import { GoSearch } from "react-icons/go";
+import ErrorMessage from "../ErrorMassage/ErrorMassage"; // Імпортуємо компонент помилок
+import s from "./SearchBar.module.css";
 
 const SearchBar = ({ onSubmit }) => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleChange = (e) => {
     setSearchQuery(e.target.value);
   };
 
   const handleSubmit = (e) => {
-    if (e) e.preventDefault();
-
-    
+    e.preventDefault();
     const trimmedQuery = searchQuery.trim();
 
     if (!trimmedQuery) {
-      toast.error('Please enter a search term!');
+      ErrorMessage("Please enter a search term!"); // Викликаємо помилку через ErrorMessage
       return;
     }
 
-    onSubmit(trimmedQuery);
-    setSearchQuery('');
+    onSubmit(trimmedQuery); // Якщо поле не порожнє, викликаємо onSubmit
+    setSearchQuery(""); // Очищаємо поле після відправки
   };
 
   const handleIconClick = () => {
     const trimmedQuery = searchQuery.trim();
 
     if (trimmedQuery) {
-      handleSubmit();
+      handleSubmit(); // Якщо поле не пусте, відправляємо форму
     } else {
-      toast.error('Please enter a search term!'); 
+      ErrorMessage("Please enter a search term!"); // Якщо поле пусте, показуємо помилку
     }
   };
 
@@ -39,11 +37,7 @@ const SearchBar = ({ onSubmit }) => {
     <header className={s.searchBar}>
       <form className={s.form} onSubmit={handleSubmit}>
         <div className={s.inputWrapper}>
-          <GoSearch
-            className={s.icon}
-            size={16}
-            onClick={handleIconClick} 
-          />
+          <GoSearch className={s.icon} size={16} onClick={handleIconClick} />
           <input
             type="text"
             value={searchQuery}

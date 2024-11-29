@@ -1,9 +1,7 @@
-import s from './ErrorMassage.module.css';
+import { toast } from "react-hot-toast";
 
-const ErrorMessage = ({ message }) => (
-  <div className={s.error}>
-    <p>{message}</p>
-  </div>
-);
+const ErrorMessage = (message) => {
+  toast.error(message); // Викликаємо toast для відображення помилки
+};
 
 export default ErrorMessage;
