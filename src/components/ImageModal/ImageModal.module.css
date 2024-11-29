@@ -21,12 +21,12 @@
   position: relative;
   text-align: center;
   overflow: hidden;
-  transform: translateY(-50px); /* Додати ефект анімації */
+  transform: translateY(-50px);
   transition: transform 0.3s ease-in-out;
 }
 
 .modal.open {
-  transform: translateY(0); /* Анімація модалки при відкритті */
+  transform: translateY(0);
 }
 
 .content {

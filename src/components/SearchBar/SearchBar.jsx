@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { GoSearch } from "react-icons/go";
-import ErrorMessage from "../ErrorMassage/ErrorMassage"; // Імпортуємо компонент помилок
+import ErrorMessage from "../ErrorMassage/ErrorMassage";
 import s from "./SearchBar.module.css";
 
 const SearchBar = ({ onSubmit }) => {
@@ -15,21 +15,21 @@ const SearchBar = ({ onSubmit }) => {
     const trimmedQuery = searchQuery.trim();
 
     if (!trimmedQuery) {
-      ErrorMessage("Please enter a search term!"); // Викликаємо помилку через ErrorMessage
+      ErrorMessage("Please enter a search term!");
       return;
     }
 
-    onSubmit(trimmedQuery); // Якщо поле не порожнє, викликаємо onSubmit
-    setSearchQuery(""); // Очищаємо поле після відправки
+    onSubmit(trimmedQuery);
+    setSearchQuery("");
   };
 
   const handleIconClick = () => {
     const trimmedQuery = searchQuery.trim();
 
     if (trimmedQuery) {
-      handleSubmit(); // Якщо поле не пусте, відправляємо форму
+      handleSubmit();
     } else {
-      ErrorMessage("Please enter a search term!"); // Якщо поле пусте, показуємо помилку
+      ErrorMessage("Please enter a search term!");
     }
   };
 

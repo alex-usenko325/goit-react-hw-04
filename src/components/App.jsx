@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { fetchImages } from "../api/fetchImages";
-import { Toaster } from "react-hot-toast"; // Імпортуємо Toaster для відображення toast повідомлень
+import { Toaster } from "react-hot-toast";
 
 import SearchBar from "./SearchBar/SearchBar";
 import ImageGallery from "./ImageGallery/ImageGallery";
 import ImageModal from "./ImageModal/ImageModal";
 import Loader from "./Loader/Loader";
 import LoadMoreBtn from "./LoadMoreBtn/LoadMoreBtn";
-import ErrorMessage from "./ErrorMassage/ErrorMassage"; // Імпортуємо компонент помилок
+import ErrorMessage from "./ErrorMassage/ErrorMassage";
 
 import "./App.css";
 
@@ -36,7 +36,7 @@ const App = () => {
       setImages((prevImages) => [...prevImages, ...results]);
     } catch (err) {
       setError(err.message);
-      ErrorMessage("Failed to load images!"); // Викликаємо помилку через ErrorMessage
+      ErrorMessage("Failed to load images!");
     } finally {
       setLoading(false);
     }
@@ -64,7 +64,7 @@ const App = () => {
   return (
     <div className="app">
       <SearchBar onSubmit={handleSearch} />
-      {error && ErrorMessage(error)} {/* Покажіть помилку, якщо вона є */}
+      {error && ErrorMessage(error)}
       {loading && query && !images.length && <Loader />}
       <ImageGallery images={images} openModal={openModal} />
       {!loading && images.length > 0 && (
@@ -78,7 +78,7 @@ const App = () => {
           onClose={closeModal}
         />
       )}
-      <Toaster /> {/* Компонент для відображення toast повідомлень */}
+      <Toaster />
     </div>
   );
 };
